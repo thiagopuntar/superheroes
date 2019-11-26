@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import axios from 'axios';
 
+import LeaderboardService from '../services/LeaderboardService';
 import {getRandomInt, shuffle } from '../utils/random';
 import Character from '../components/Character';
 import AnswerOptions from '../components/AnswerOptions';
@@ -42,7 +43,7 @@ class GameScreen extends Component {
             selectedCharacter: {},
             options: [],
             hit: null,
-            rounds: 20,
+            rounds: 2,
             actualRound: 1,
             hitNumber: 0,
             isLoading: true,
@@ -50,7 +51,8 @@ class GameScreen extends Component {
             img: '',
             successImg: null,
             failureImg: null,
-            error: false
+            error: false,
+            saveGame: true
         }
     }
 
@@ -107,8 +109,21 @@ class GameScreen extends Component {
         this.setState({ ...nextRound, hit: null, actualRound, isLoading: true });
     }
 
+    computeHitPercentage() {
+        const { rounds, hitNumber } = this.state;
+        return parseInt((hitNumber / rounds) * 100, 10);
+    }
+
     componentDidUpdate() {
-        const { selectedCharacter, isLoading } = this.state;
+        const { 
+            selectedCharacter, 
+            isLoading, 
+            actualRound, 
+            rounds,
+            hitNumber
+        } = this.state;
+
+        const { player, points } = this.props;
 
         if (isLoading) {
             const imgUrl = selectedCharacter.images.md;
@@ -120,7 +135,21 @@ class GameScreen extends Component {
                 .catch(error => {
                     this.setState({ error, isLoading: false });
                 });
+
+            if (actualRound > rounds) {
+                const service = new LeaderboardService();
+                const record = {
+                    player,
+                    points,
+                    hitNumber,
+                    percentage: this.computeHitPercentage()
+                }
+    
+                service.save(record);
+            }
         }
+
+        
     }
 
     render() {
@@ -130,7 +159,6 @@ class GameScreen extends Component {
             options, 
             rounds, 
             actualRound, 
-            hitNumber, 
             isLoading,
             img,
             disableButtons,
@@ -145,8 +173,7 @@ class GameScreen extends Component {
             actualRound > rounds ?
             <Result 
                 points={points}
-                rounds={rounds}
-                hits={hitNumber}
+                percentage={this.computeHitPercentage()}
                 onRestart={onRestart}
             /> :
             <Fragment>

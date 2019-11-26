@@ -6,12 +6,12 @@ const Div = styled.div`
     text-align: center;
 `;
 
-const Result = ({ points, hits, rounds, onRestart }) => {
+const Result = ({ points, percentage, onRestart }) => {
     return ( 
         <Div>
             <h2>Acabou!</h2>
             <p>{points} pontos.</p>
-            <p>Acerto de {parseInt((hits / rounds) * 100, 10)} %</p>
+            <p>Acerto de {percentage} %</p>
 
             <Button 
                 variant="contained" 

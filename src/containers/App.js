@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 import GameScreen from './GameScreen';
 import Home from './Home';
-import LeaderBoard from './LeaderBoard';
+import Leaderboard from './Leaderboard';
 import Welcome from '../components/Welcome';
 import Container from '../components/Container';
 import Header from '../components/Header';
@@ -39,7 +39,7 @@ class App extends Component {
     }
 
     handleRestart = () => {
-        this.setState({ hasStarted: false });
+        this.setState({ hasStarted: false, totalPoints: 0, player: null });
     }
 
     handlePlayerChange = player => {
@@ -76,6 +76,7 @@ class App extends Component {
                         return !hasStarted ? 
                             <Redirect to="/" push={true} /> :
                             <GameScreen 
+                            player={player}
                             chars={chars} 
                             onAnswer={this.handleAnswer} 
                             onRestart={this.handleRestart}
@@ -85,7 +86,7 @@ class App extends Component {
 
                     {hasStarted && <Redirect to="/play" push={true} />}
 
-                    <Route path="/leaderBoard" component={LeaderBoard}/>
+                    <Route path="/leaderBoard" component={Leaderboard}/>
                 </Container>
             </Router>
         );

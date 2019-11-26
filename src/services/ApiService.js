@@ -22,7 +22,6 @@ class ApiService {
                 console.log('Não foi possível pegar os chars ', err);
             })
     }
-   
 
     // Old stuff
 

@@ -1,9 +1,25 @@
-import React from 'react';
+import React, { Component } from 'react';
+import LeaderboardService from '../services/LeaderboardService';
 
-const LeaderBoard = () => {
-    return ( 
-        <h1>Leader Board</h1>
-     );
+class Leaderboard extends Component {
+    state = { 
+        records: []
+    }
+
+    componentDidMount() {
+        const service = new LeaderboardService();
+        service.list()
+            .then(records => this.setState({ records }));
+    }
+
+    
+
+    render() { 
+        return ( 
+            <table>
+            </table>
+         );
+    }
 }
  
-export default LeaderBoard;
+export default Leaderboard;
