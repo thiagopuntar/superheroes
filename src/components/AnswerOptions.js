@@ -9,7 +9,7 @@ const AnswerButton = styled(Button)`
 `;
 
 const AnswerOptions = ({ options, onAnswer, disable }) => (
-    disable === null && options.map(char => (
+    !disable && options.map(char => (
             <AnswerButton
                 variant="contained"
                 key={char.id} 

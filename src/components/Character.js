@@ -7,7 +7,7 @@ const Image = styled.img`
 `;
 
 const Character = ({ imageUrl }) => (
-    <Image src={imageUrl} alt="Character" />
+    <Image src={`data:image/jpg;base64,${imageUrl}`} alt="Character" />
 );
 
 export default Character;

@@ -6,7 +6,6 @@ const Div = styled.div`
     text-align: center;
 `;
 
-
 const Result = ({ points, hits, rounds, onRestart }) => {
     return ( 
         <Div>
