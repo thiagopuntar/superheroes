@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { addHour } from '../utils/date';
 // TODO: Refactor this when the own api is done!!! The secret token SHOULD NOT be here.
 const accessToken = process.env.REACT_APP_ACCESS_TOKEN;
 
@@ -76,11 +75,9 @@ class ApiService {
     }
 
     _setCharsToLocalStorage(chars) {
-        const expireDate = addHour(new Date(), 2);
 
         const objToPersist = {
-            chars,
-            expireDate
+            chars
         }
 
         window.localStorage.setItem('chars', JSON.stringify(objToPersist));

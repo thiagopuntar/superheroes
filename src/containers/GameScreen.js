@@ -51,8 +51,7 @@ class GameScreen extends Component {
             img: '',
             successImg: null,
             failureImg: null,
-            error: false,
-            saveGame: true
+            error: false
         }
     }
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import LeaderboardService from '../services/LeaderboardService';
+import Table from '../components/Table';
 
 class Leaderboard extends Component {
     state = { 
@@ -15,9 +16,10 @@ class Leaderboard extends Component {
     
 
     render() { 
+        const { records } = this.state;
+
         return ( 
-            <table>
-            </table>
+            <Table rows={records}/>
          );
     }
 }
