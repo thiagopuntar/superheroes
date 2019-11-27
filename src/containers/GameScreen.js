@@ -43,7 +43,7 @@ class GameScreen extends Component {
             selectedCharacter: {},
             options: [],
             hit: null,
-            rounds: 2,
+            rounds: 100,
             actualRound: 1,
             hitNumber: 0,
             isLoading: true,
