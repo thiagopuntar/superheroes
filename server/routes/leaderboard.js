@@ -9,7 +9,8 @@ router.get('/', (req, res) => {
         .exec(function(err, docs) {
             if (err) return res.status(500).send('Ops, some error ocurred!');
 
-            res.json(docs);
+            const records = docs.map(d => new GameRecord(d));
+            res.json(records);
         });
 });
 
